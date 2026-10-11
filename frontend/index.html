@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Escape Room Solver</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the game</a>
+
+  <div id="net-error" class="net-error" role="alert" hidden>
+    <span id="net-error-text">Cannot reach the game server.</span>
+    <button type="button" id="net-retry" class="btn btn-small">Try again</button>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="/assets/logo.svg" alt="" width="48" height="48">
+      <div>
+        <h1>AI Escape Room Solver</h1>
+        <p class="brand-sub">Intelligent Decision System</p>
+      </div>
+    </div>
+    <div class="hud" aria-label="Game statistics">
+      <div class="hud-item"><span class="hud-label">Time</span><span class="hud-value" id="hud-time">00:00</span></div>
+      <div class="hud-item"><span class="hud-label">Moves</span><span class="hud-value" id="hud-moves">0</span></div>
+      <div class="hud-item"><span class="hud-label">Hints</span><span class="hud-value" id="hud-hints">0</span></div>
+      <div class="hud-item"><span class="hud-label">Mission</span><span class="hud-value" id="hud-mission">In progress</span></div>
+      <span class="pill pill-live" id="room-pill"><span class="dot" aria-hidden="true"></span><span id="room-pill-text">Loading</span></span>
+      <button type="button" class="btn" id="restart-btn">Restart</button>
+    </div>
+  </header>
+
+  <nav id="stepper" class="stepper" aria-label="Room map"></nav>
+
+  <main id="main" class="game" aria-busy="true">
+    <section id="room-panel" class="col col-room" aria-label="Current room"></section>
+    <section id="ai-panel" class="col col-ai" aria-label="AI reasoning"></section>
+    <aside id="side-panel" class="col col-side" aria-label="Inventory and objectives"></aside>
+  </main>
+
+  <section class="dash" aria-label="Game dashboard">
+    <article class="card">
+      <h2>Game output</h2>
+      <div id="output" class="output" role="status" aria-live="polite"></div>
+    </article>
+    <article class="card">
+      <h2>Knowledge base</h2>
+      <ul id="knowledge" class="knowledge"></ul>
+    </article>
+    <article class="card">
+      <h2>Mission progress</h2>
+      <div id="progress"></div>
+    </article>
+    <article class="card card-wide">
+      <h2>AI solution log</h2>
+      <ol id="log" class="log" role="log" aria-live="off" tabindex="0" aria-label="Event log"></ol>
+    </article>
+  </section>
+
+  <footer class="foot">
+    Everything on this page is computed by the Python backend. The in-game assistant is rule-based:
+    no external AI service and no API key.
+  </footer>
+
+  <div id="win" class="win" role="dialog" aria-modal="true" aria-labelledby="win-title" hidden>
+    <div class="win-box">
+      <h2 id="win-title">You escaped</h2>
+      <p id="win-text"></p>
+      <div class="win-actions">
+        <button type="button" class="btn btn-primary" id="win-again">Play again</button>
+        <button type="button" class="btn" id="win-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/script.js" defer></script>
+</body>
+</html>
